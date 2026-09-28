@@ -8,83 +8,196 @@
 }
 
 html, body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: #0a0a10;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Courier New', Courier, monospace, sans-serif;
-  color: #fff;
-}
-
-#arcade-cabinet {
-  position: relative;
   width: 100vw;
   height: 100vh;
-  max-width: 960px;
-  max-height: 720px;
-  background: #14121e;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 0.9), inset 0 0 20px #241b35;
-  border: 12px solid #2b253b;
-  border-radius: 12px;
-}
-
-#game-frame {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  background: #050409;
   overflow: hidden;
+  background: #090812;
+  font-family: 'Courier New', Courier, monospace, sans-serif;
+  color: #ffffff;
 }
 
 #gameCanvas {
   display: block;
-  width: 100%;
-  height: 100%;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-crisp-edges;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
+  z-index: 1;
 }
 
-/* Retro CRT and Scanline Shading */
+/* Subtle CRT Scanlines */
 #crt-overlay {
   pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: 
-    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.28) 50%),
-    radial-gradient(circle at center, transparent 65%, rgba(0, 0, 0, 0.7) 100%);
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+    radial-gradient(circle at center, transparent 70%, rgba(0, 0, 0, 0.65) 100%);
   background-size: 100% 4px, 100% 100%;
-  opacity: 0.85;
-  z-index: 10;
-  transition: opacity 0.2s ease;
+  opacity: 0.75;
+  z-index: 5;
 }
 
-#crt-overlay.disabled {
+/* Modal Popup Windows for Stands */
+#modal-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(8, 6, 14, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+#modal-container.hidden {
   display: none;
 }
 
-/* Touch Controls for Mobile Devices */
+.pixel-modal {
+  width: 90%;
+  max-width: 580px;
+  background: #1e152a;
+  border: 4px solid #ffd32a;
+  box-shadow: 0 0 0 6px #382452, 0 16px 30px rgba(0, 0, 0, 0.9);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+.pixel-modal.hidden {
+  display: none;
+}
+
+.modal-header {
+  font-size: 22px;
+  font-weight: 900;
+  color: #2ed573;
+  text-shadow: 2px 2px #000;
+  letter-spacing: 1px;
+}
+
+.modal-gold-display {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffd32a;
+}
+
+.modal-body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.upgrades-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.upgrade-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2a1f3d;
+  padding: 8px 12px;
+  border: 2px solid #57407a;
+}
+
+.upg-info {
+  text-align: left;
+}
+
+.upg-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.upg-desc {
+  font-size: 11px;
+  color: #b8b3cc;
+}
+
+/* Pixel Buttons */
+.pixel-btn {
+  background: #2ed573;
+  border: 3px solid #ffffff;
+  color: #0b1a11;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  padding: 10px 18px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #1b663b;
+  touch-action: manipulation;
+}
+
+.pixel-btn:hover {
+  filter: brightness(1.15);
+}
+
+.pixel-btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #1b663b;
+}
+
+.btn-gold {
+  background: #ffa502;
+  box-shadow: 0 4px 0 #995c00;
+}
+
+.btn-close {
+  background: #747d8c;
+  color: #fff;
+  align-self: center;
+  padding: 8px 24px;
+  box-shadow: 0 4px 0 #474f5c;
+}
+
+.btn-buy {
+  font-size: 12px;
+  padding: 6px 14px;
+}
+
+.btn-max {
+  background: #57606f;
+  color: #a4b0be;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Mobile Controls */
 #mobile-controls {
   display: none;
   position: absolute;
-  bottom: 12px;
+  bottom: 24px;
   left: 0;
-  width: 100%;
-  padding: 0 24px;
+  width: 100vw;
+  padding: 0 28px;
   justify-content: space-between;
   align-items: flex-end;
   pointer-events: none;
-  z-index: 20;
+  z-index: 15;
 }
 
 @media (max-width: 860px), (hover: none) and (pointer: coarse) {
@@ -93,17 +206,12 @@ html, body {
   }
 }
 
-#joystick-zone {
-  pointer-events: auto;
-  width: 130px;
-  height: 130px;
-}
-
 #joystick-base {
-  width: 110px;
-  height: 110px;
-  background: rgba(30, 25, 45, 0.65);
-  border: 4px solid #5b4a78;
+  pointer-events: auto;
+  width: 120px;
+  height: 120px;
+  background: rgba(30, 22, 45, 0.65);
+  border: 4px solid #73539c;
   border-radius: 50%;
   position: relative;
   touch-action: none;
@@ -112,15 +220,15 @@ html, body {
 #joystick-stick {
   width: 48px;
   height: 48px;
-  background: #ffaa00;
-  border: 4px solid #fff;
+  background: #ffd32a;
+  border: 3px solid #fff;
   border-radius: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  box-shadow: 0 4px #b85f00;
+  box-shadow: 0 4px 0 #b38b00;
 }
 
 #action-buttons {
@@ -129,36 +237,27 @@ html, body {
   pointer-events: auto;
 }
 
-.arcade-touch-btn {
+.touch-btn {
   width: 76px;
   height: 76px;
-  background: #b8233a;
-  border: 4px solid #ffd43f;
-  border-radius: 8px;
+  background: #3742fa;
+  border: 4px solid #fff;
+  border-radius: 12px;
   color: #fff;
   font-family: inherit;
   font-size: 15px;
-  font-weight: bold;
-  text-shadow: 2px 2px #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 6px 0 #5b101d, 0 10px 10px rgba(0, 0, 0, 0.5);
+  font-weight: 900;
+  box-shadow: 0 6px 0 #1e2499;
   cursor: pointer;
   touch-action: manipulation;
 }
 
-.arcade-touch-btn:active {
+.touch-btn:active {
   transform: translateY(4px);
-  box-shadow: 0 2px 0 #5b101d;
+  box-shadow: 0 2px 0 #1e2499;
 }
 
-#btn-dash {
-  background: #1e70ba;
-  box-shadow: 0 6px 0 #0d3b66;
+.btn-chop {
+  background: #ff4757;
+  box-shadow: 0 6px 0 #b31b28;
 }
-
-#btn-dash:active {
-  box-shadow: 0 2px 0 #0d3b66;
-}
-
