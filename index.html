@@ -3,37 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Pixel Cactus Clash - Retro Arcade</title>
+  <title>Pixel Cactus Clash</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="arcade-cabinet">
-    <div id="game-frame">
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
-      
-      <!-- Retro CRT Scanline & Vignette Effect Overlay -->
-      <div id="crt-overlay"></div>
-      
-      <!-- Mobile On-Screen Virtual Controls -->
-      <div id="mobile-controls">
-        <div id="joystick-zone">
-          <div id="joystick-base">
-            <div id="joystick-stick"></div>
-          </div>
-        </div>
-        <div id="action-buttons">
-          <button id="btn-dash" class="arcade-touch-btn" aria-label="Dash">
-            <span>DASH</span>
-          </button>
-          <button id="btn-attack" class="arcade-touch-btn" aria-label="Attack">
-            <span>CHOP</span>
-          </button>
+  <!-- Fullscreen Game Canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Retro Scanline Overlay -->
+  <div id="crt-overlay"></div>
+
+  <!-- In-Game Stand Modals -->
+  <div id="modal-container" class="hidden">
+    <!-- Sell Stand Modal -->
+    <div id="sell-modal" class="pixel-modal hidden">
+      <div class="modal-header">🌵 CACTUS TRADING POST</div>
+      <div class="modal-body">
+        <p id="sell-parts-count">Cactus Parts: 0</p>
+        <p id="sell-rate-text">Rate: $10 per part</p>
+        <div class="modal-actions">
+          <button id="btn-sell-one" class="pixel-btn">SELL 1</button>
+          <button id="btn-sell-all" class="pixel-btn btn-gold">SELL ALL</button>
         </div>
       </div>
+      <button id="btn-close-sell" class="pixel-btn btn-close">CLOSE [ESC]</button>
+    </div>
+
+    <!-- Upgrade Stand Modal -->
+    <div id="shop-modal" class="pixel-modal hidden">
+      <div class="modal-header">⚒️ UPGRADE WORKSHOP</div>
+      <div class="modal-gold-display" id="shop-gold-display">GOLD: $0</div>
+      <div class="modal-body upgrades-grid" id="upgrades-list">
+        <!-- Rendered dynamically -->
+      </div>
+      <button id="btn-close-shop" class="pixel-btn btn-close">CLOSE [ESC]</button>
+    </div>
+  </div>
+
+  <!-- Mobile Controls -->
+  <div id="mobile-controls">
+    <div id="joystick-base">
+      <div id="joystick-stick"></div>
+    </div>
+    <div id="action-buttons">
+      <button id="btn-dash" class="touch-btn">DASH</button>
+      <button id="btn-attack" class="touch-btn btn-chop">CHOP</button>
     </div>
   </div>
 
   <script src="script.js"></script>
 </body>
 </html>
-
