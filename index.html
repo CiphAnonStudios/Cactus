@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Pixel Cactus Clash - Retro Arcade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="arcade-cabinet">
+    <div id="game-frame">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+      
+      <!-- Retro CRT Scanline & Vignette Effect Overlay -->
+      <div id="crt-overlay"></div>
+      
+      <!-- Mobile On-Screen Virtual Controls -->
+      <div id="mobile-controls">
+        <div id="joystick-zone">
+          <div id="joystick-base">
+            <div id="joystick-stick"></div>
+          </div>
+        </div>
+        <div id="action-buttons">
+          <button id="btn-dash" class="arcade-touch-btn" aria-label="Dash">
+            <span>DASH</span>
+          </button>
+          <button id="btn-attack" class="arcade-touch-btn" aria-label="Attack">
+            <span>CHOP</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
 
